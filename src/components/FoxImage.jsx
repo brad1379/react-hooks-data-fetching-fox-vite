@@ -8,6 +8,11 @@ function FoxImage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    fetchNewImage()
+  }, [])
+
+  function fetchNewImage() {
+    setLoading(true)
     fetch(API_URL)
     .then((response) => {
       if (!response.ok) {
@@ -20,15 +25,14 @@ function FoxImage() {
       setLoading(false);
     })
     .catch(error => console.error("Error fetching image", error))
-  }, [])
-
-  
+  }
   
   return (
     <div>
       <p>Learn more about us!</p>
       {loading ? <p>Loading...</p> : ""}
       <img src={image} alt="fox logo" />
+      <button onClick={fetchNewImage}>Get New Fox</button>
     </div>
   );
 }
